@@ -44,7 +44,7 @@ scikit-learn==0.21.2
 pywt==1.0.3
 ```
 
-# My Re Implement
+# My Re-Implement
 
 # Environment
 ``` bash
