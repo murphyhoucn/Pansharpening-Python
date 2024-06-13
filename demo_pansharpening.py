@@ -50,4 +50,4 @@ if not os.path.isdir(save_dir):
 '''here is the main function'''
 fused_image = GSA(used_pan[:, :, :], used_ms[:, :, :])
 
-cv2.imwrite(save_dir+'GSA.tiff', fused_image[:, :, [2, 3, 5]])
+cv2.imwrite(save_dir+'GSA.png', fused_image[:, :, [2, 3, 5]])

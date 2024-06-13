@@ -22,14 +22,18 @@ from methods.MTF_GLP_HPM import MTF_GLP_HPM
 from methods.GSA import GSA
 from methods.CNMF import CNMF
 from methods.GFPCA import GFPCA
-from methods.PNN import PNN
-from methods.PanNet import PanNet
+# from methods.PNN import PNN
+# from methods.PanNet import PanNet
 
 from metrics import ref_evaluate, no_ref_evaluate
 
 '''loading data'''
-original_msi = np.load('./images/GF2_BJ_mss.npy')
-original_pan = np.load('./images/GF2_BJ_pan.npy')
+# original_msi = np.load('./images/GF2_BJ_mss.npy')
+# original_pan = np.load('./images/GF2_BJ_pan.npy')
+
+original_msi = np.load('./images/WV2_Sydney_img_ms.npy')
+original_pan = np.load('./images/WV2_Sydney_img_pan.npy')
+
 
 '''normalization'''
 max_patch, min_patch = np.max(original_msi, axis=(0,1)), np.min(original_msi, axis=(0,1))
@@ -37,6 +41,9 @@ original_msi = np.float32(original_msi-min_patch) / (max_patch - min_patch)
 
 max_patch, min_patch = np.max(original_pan, axis=(0,1)), np.min(original_pan, axis=(0,1))
 original_pan = np.float32(original_pan-min_patch) / (max_patch - min_patch)
+
+print(f"msi:   {original_msi.shape}, {type(original_msi)}")
+print(f"pan:   {original_pan.shape}, {type(original_pan)}")
 
 '''generating ms image with gaussian kernel'''
 sig = (1/(2*(2.772587)/4**2))**0.5
@@ -91,7 +98,7 @@ ref_results.update({'Bicubic    ':temp_ref_results})
 no_ref_results.update({'Bicubic    ':temp_no_ref_results})
 #save
 if save_images:
-    cv2.imwrite(save_dir+'Bicubic.tiff', fused_image[:, :, save_channels])
+    cv2.imwrite(save_dir+'Bicubic.png', fused_image[:, :, save_channels])
 
 '''Brovey method'''
 print('evaluating Brovey method')
@@ -102,7 +109,7 @@ ref_results.update({'Brovey     ':temp_ref_results})
 no_ref_results.update({'Brovey     ':temp_no_ref_results})
 #save
 if save_images:
-    cv2.imwrite(save_dir+'Brovey.tiff', fused_image[:, :, save_channels])
+    cv2.imwrite(save_dir+'Brovey.png', fused_image[:, :, save_channels])
     
 '''PCA method'''
 print('evaluating PCA method')
@@ -113,7 +120,7 @@ ref_results.update({'PCA        ':temp_ref_results})
 no_ref_results.update({'PCA        ':temp_no_ref_results})
 #save
 if save_images:
-    cv2.imwrite(save_dir+'PCA.tiff', fused_image[:, :, save_channels])
+    cv2.imwrite(save_dir+'PCA.png', fused_image[:, :, save_channels])
     
 '''IHS method'''
 print('evaluating IHS method')
@@ -124,7 +131,7 @@ ref_results.update({'IHS        ':temp_ref_results})
 no_ref_results.update({'IHS        ':temp_no_ref_results})
 #save
 if save_images:
-    cv2.imwrite(save_dir+'IHS.tiff', fused_image[:, :, save_channels])
+    cv2.imwrite(save_dir+'IHS.png', fused_image[:, :, save_channels])
     
 '''SFIM method'''
 print('evaluating SFIM method')
@@ -135,7 +142,7 @@ ref_results.update({'SFIM       ':temp_ref_results})
 no_ref_results.update({'SFIM       ':temp_no_ref_results})
 #save
 if save_images:
-    cv2.imwrite(save_dir+'SFIM.tiff', fused_image[:, :, save_channels])
+    cv2.imwrite(save_dir+'SFIM.png', fused_image[:, :, save_channels])
 
 '''GS method'''
 print('evaluating GS method')
@@ -146,7 +153,7 @@ ref_results.update({'GS         ':temp_ref_results})
 no_ref_results.update({'GS         ':temp_no_ref_results})
 #save
 if save_images:
-    cv2.imwrite(save_dir+'GS.tiff', fused_image[:, :, save_channels])
+    cv2.imwrite(save_dir+'GS.png', fused_image[:, :, save_channels])
     
 '''Wavelet method'''
 print('evaluating Wavelet method')
@@ -157,7 +164,7 @@ ref_results.update({'Wavelet    ':temp_ref_results})
 no_ref_results.update({'Wavelet    ':temp_no_ref_results})
 #save
 if save_images:
-    cv2.imwrite(save_dir+'Wavelet.tiff', fused_image[:, :, save_channels])
+    cv2.imwrite(save_dir+'Wavelet.png', fused_image[:, :, save_channels])
 
 '''MTF_GLP method'''
 print('evaluating MTF_GLP method')
@@ -168,7 +175,7 @@ ref_results.update({'MTF_GLP    ':temp_ref_results})
 no_ref_results.update({'MTF_GLP    ':temp_no_ref_results})
 #save
 if save_images:
-    cv2.imwrite(save_dir+'MTF_GLP.tiff', fused_image[:, :, save_channels])
+    cv2.imwrite(save_dir+'MTF_GLP.png', fused_image[:, :, save_channels])
 
 '''MTF_GLP_HPM method'''
 print('evaluating MTF_GLP_HPM method')
@@ -179,7 +186,7 @@ ref_results.update({'MTF_GLP_HPM':temp_ref_results})
 no_ref_results.update({'MTF_GLP_HPM':temp_no_ref_results})
 #save
 if save_images:
-    cv2.imwrite(save_dir+'MTF_GLP_HPM.tiff', fused_image[:, :, save_channels])
+    cv2.imwrite(save_dir+'MTF_GLP_HPM.png', fused_image[:, :, save_channels])
 
 '''GSA method'''
 print('evaluating GSA method')
@@ -190,7 +197,7 @@ ref_results.update({'GSA        ':temp_ref_results})
 no_ref_results.update({'GSA        ':temp_no_ref_results})
 #save
 if save_images:
-    cv2.imwrite(save_dir+'GSA.tiff', fused_image[:, :, save_channels])
+    cv2.imwrite(save_dir+'GSA.png', fused_image[:, :, save_channels])
 
 '''CNMF method'''
 print('evaluating CNMF method')
@@ -201,7 +208,7 @@ ref_results.update({'CNMF       ':temp_ref_results})
 no_ref_results.update({'CNMF       ':temp_no_ref_results})
 #save
 if save_images:
-    cv2.imwrite(save_dir+'CNMF.tiff', fused_image[:, :, save_channels])
+    cv2.imwrite(save_dir+'CNMF.png', fused_image[:, :, save_channels])
 
 '''GFPCA method'''
 print('evaluating GFPCA method')
@@ -212,29 +219,29 @@ ref_results.update({'GFPCA      ':temp_ref_results})
 no_ref_results.update({'GFPCA      ':temp_no_ref_results})
 #save
 if save_images:
-    cv2.imwrite(save_dir+'GFPCA.tiff', fused_image[:, :, save_channels])
+    cv2.imwrite(save_dir+'GFPCA.png', fused_image[:, :, save_channels])
 
-'''PNN method'''
-print('evaluating PNN method')
-fused_image = PNN(used_pan[:, :, :], used_ms[:, :, :])
-temp_ref_results = ref_evaluate(fused_image, gt)
-temp_no_ref_results = no_ref_evaluate(fused_image, np.uint8(used_pan*255), np.uint8(used_ms*255))
-ref_results.update({'PNN        ':temp_ref_results})
-no_ref_results.update({'PNN        ':temp_no_ref_results})
-#save
-if save_images:
-    cv2.imwrite(save_dir+'PNN.tiff', fused_image[:, :, save_channels])
+# '''PNN method'''
+# print('evaluating PNN method')
+# fused_image = PNN(used_pan[:, :, :], used_ms[:, :, :])
+# temp_ref_results = ref_evaluate(fused_image, gt)
+# temp_no_ref_results = no_ref_evaluate(fused_image, np.uint8(used_pan*255), np.uint8(used_ms*255))
+# ref_results.update({'PNN        ':temp_ref_results})
+# no_ref_results.update({'PNN        ':temp_no_ref_results})
+# #save
+# if save_images:
+#     cv2.imwrite(save_dir+'PNN.png', fused_image[:, :, save_channels])
 
-'''PanNet method'''
-print('evaluating PanNet method')
-fused_image = PanNet(used_pan[:, :, :], used_ms[:, :, :])
-temp_ref_results = ref_evaluate(fused_image, gt)
-temp_no_ref_results = no_ref_evaluate(fused_image, np.uint8(used_pan*255), np.uint8(used_ms*255))
-ref_results.update({'PanNet     ':temp_ref_results})
-no_ref_results.update({'PanNet     ':temp_no_ref_results})
-#save
-if save_images:
-    cv2.imwrite(save_dir+'PanNet.tiff', fused_image[:, :, save_channels])
+# '''PanNet method'''
+# print('evaluating PanNet method')
+# fused_image = PanNet(used_pan[:, :, :], used_ms[:, :, :])
+# temp_ref_results = ref_evaluate(fused_image, gt)
+# temp_no_ref_results = no_ref_evaluate(fused_image, np.uint8(used_pan*255), np.uint8(used_ms*255))
+# ref_results.update({'PanNet     ':temp_ref_results})
+# no_ref_results.update({'PanNet     ':temp_no_ref_results})
+# #save
+# if save_images:
+#     cv2.imwrite(save_dir+'PanNet.png', fused_image[:, :, save_channels])
 
 ''''print result'''
 print('################## reference comparision #######################')
