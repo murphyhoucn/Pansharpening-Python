@@ -44,7 +44,7 @@ scikit-learn==0.21.2
 pywt==1.0.3
 ```
 
-# My Re-Implement
+# README of Murphy
 
 # Environment
 ``` bash
@@ -86,3 +86,13 @@ Werkzeug              2.0.3
 wheel                 0.37.1
 zipp                  3.6.0
 ```
+
+## About code
+
+- 文件类型转换
+
+'./ENVIProcessing/hdr2npy.py' : 如果原始数据是ENVI导出的hdr文件，用这个代码转换成npy文件。
+
+- 环境配置
+
+所用系统为Ubuntu 18.04 LTS，CUDA 11.3。‘tensorflow-gpu 1.8.0’在这个环境下不能使用！！！所以深度学习方法都跑不起来，其他方法可以跑通。
